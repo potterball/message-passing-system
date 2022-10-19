@@ -1,0 +1,50 @@
+#Apache Maven variables
+variables:
+  M2_HOME: /opt/maven
+  M2: $M2_HOME/bin
+  MAVEN_OPTS: "-Xms256m -Xmx512m"
+
+#Add mvn to PATH environment variable
+before_script:
+  - export PATH=$PATH:$M2
+
+#Pipeline stages
+stages:
+  - Build
+  - Test
+  - Package
+
+#Compile program based on pom.xml
+build:
+  stage: Build
+  script:
+    - cd peer-to-peer-messaging-system
+    - mvn compile
+  tags:
+    - cpsc501
+
+#Test program based on pom.xml
+test:
+  stage: Test
+  script:
+    - cd peer-to-peer-messaging-system
+    - mvn test
+  tags:
+    - cpsc501
+
+#Package program based on pom.xml
+package:
+  stage: Package
+  script:
+    - cd peer-to-peer-messaging-system
+    - mvn package
+    - cd ..
+    - cp peer-to-peer-messaging-system/target/peer-to-peer-messaging-system-1.0-SNAPSHOT.jar peer-to-peer-messaging-system-1.0-SNAPSHOT.jar
+  artifacts:
+    paths:
+      - peer-to-peer-messaging-system-1.0-SNAPSHOT.jar
+      - registry-1.0-SNAPSHOT.jar
+  tags:
+    - cpsc501
+  only:
+    - main
