@@ -1,7 +1,5 @@
 # Peer-to-Peer Messaging System
 
-Distributed Systems course (CPSC 559) project. Refactored for CPSC 501.
-
 `registry-1.0-SNAPSHOT` developed by Professor Nathaly Verwaal at the University of Calgary to test the functionality of the project.
 
 Project `peer-to-peer-messaging-system` developed by Me(Ahmed Najjar).
